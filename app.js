@@ -4,7 +4,7 @@ const app = express();
 
 var mysql = require('mysql');
 
-//setup your mySQL connection here
+//change code to setup your database connection here
 var con = mysql.createConnection({
     host: "localhost",
     user: "gary",
@@ -16,7 +16,7 @@ con.connect(function(err) {
     if (err) throw err;
     console.log("Connected to mysql server");
   });
-//====================================test code
+//====================================
 app.get('/',(req,res)=>{
     res.json({
         message: "get Success"
@@ -117,7 +117,7 @@ app.post('/photos',verifyToken,(req,res)=>{
                         con.query("SELECT * FROM albums where id='"+targetAlbum[0].albumId+"' AND userId='"+ user.id+"'",function(err,result,fields){
                             if(result.length==0){
                                 res.json({
-                                    message: "The photo does not exist or you don't have Permission to access it."
+                                    message: "You don't have Permission to access this photo."
                                 });
                             }
                             else{
